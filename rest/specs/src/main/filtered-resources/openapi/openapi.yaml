@@ -6,7 +6,6 @@
 #
 
 openapi: 3.0.2
-
 info:
   version: ${project.version}
   title: Ingest API
@@ -18,10 +17,8 @@ info:
   license:
     name: GNU Lesser General Public License
     url: 'http://www.gnu.org/licenses/lgpl.html'
-
 servers:
   - url: ${rest.server.url}
-
 paths:
   /ingest:
     post:
@@ -41,29 +38,7 @@ paths:
         content:
           multipart/form-data:
             schema:
-              type: object
-              properties:
-                file:
-                  description: >
-                    The actual file attachment that is sent in the request. The current maximum is the character
-                    equivalent of 10GB.
-                  type: string
-                  format: binary
-                  minLength: 1
-                  maxLength: 14316557655
-                correlationId:
-                  description: >
-                    A unique client provided identifier for the product to be ingested which will allow the client to
-                    retrieve the product and/or any other information associated with it in the future. Only one product
-                    can exist with a given correlation identifier. This means that a request to ingest a product with an
-                    existing correlation id will result in a failure with no changes to the existing product or
-                    associated information.
-                  type: string
-                  minLength: 1
-                  maxLength: 256
-              required:
-                - file
-                - correlationId
+              $ref: '#/components/schemas/IngestRequest'
       responses:
         '202':
           $ref: '#/components/responses/Accepted'
@@ -75,9 +50,6 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '501':
           $ref: '#/components/responses/NotImplemented'
-        'default':
-          $ref: '#/components/responses/DefaultError'
-
 components:
   responses:
     Accepted:
@@ -126,16 +98,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorMessage'
-    DefaultError:
-      description: >
-        Any other possible errors not currently known.
-      headers:
-        'Content-Version':
-          $ref: '#/components/headers/ContentVersion'
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorMessage'
   parameters:
     Accept-Version:
       name: Accept-Version
@@ -165,6 +127,44 @@ components:
           value: '1.2.0-SNAPSHOT'
           summary: A development version
   schemas:
+    IngestRequest:
+      type: object
+      properties:
+        file:
+          $ref: '#/components/schemas/File'
+        correlationId:
+          $ref: '#/components/schemas/CorrelationId'
+        metacard:
+          $ref: '#/components/schemas/Metacard'
+      required:
+        - file
+        - correlationId
+        - metacard
+    File:
+      description: >
+        A file attachment that is sent in the request. The current maximum is the character equivalent of 10GB.
+      type: string
+      format: binary
+      minLength: 1
+      maxLength: 14316557655
+    CorrelationId:
+      description: >
+        A unique client provided identifier for the product to be ingested which will allow the client to
+        retrieve the product and/or any other information associated with it in the future. Only one product
+        can exist with a given correlation identifier. This means that a request to ingest a product with an
+        existing correlation id will result in a failure with no changes to the existing product or
+        associated information.
+      type: string
+      minLength: 1
+      maxLength: 256
+    Metacard:
+      description: >
+        A metacard.xml attachment that is sent along with a product to enhance the product's discoverability. The
+        current maximum is the character equivalent of 10GB.
+      type: string
+      format: binary
+      minLength: 1
+      maxLength: 14316557655
     Version:
       description: Version number.
       type: string

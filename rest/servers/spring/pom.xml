@@ -13,7 +13,7 @@
     <parent>
         <groupId>com.connexta.ingest</groupId>
         <artifactId>ingest-api-rest-servers</artifactId>
-        <version>0.4.3-SNAPSHOT</version>
+        <version>0.5.0-SNAPSHOT</version>
     </parent>
 
     <name>Ingest API :: REST Spring Stubs</name>
@@ -70,43 +70,44 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.openapitools</groupId>
-                <artifactId>openapi-generator-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <inputSpec>${project.build.directory}/openapi/openapi.yaml
-                            </inputSpec>
-                            <generatorName>spring</generatorName>
-                            <apiPackage>${root.package}.stub</apiPackage>
-                            <configOptions>
-                                <java8>true</java8>
-                                <dateLibrary>java8</dateLibrary>
-                                <useTags>true</useTags>
-                                <interfaceOnly>true</interfaceOnly>
-                                <useOptional>true</useOptional>
-                                <booleanGetterPrefix>is</booleanGetterPrefix>
-                                <sortParamsByRequiredFlag>true</sortParamsByRequiredFlag>
-                                <useBeanValidation>true</useBeanValidation>
-                                <performBeanValidation>false</performBeanValidation>
-                                <sourceFolder>src/main/java</sourceFolder>
-                            </configOptions>
-                            <modelPackage>${rest.models.package}</modelPackage>
-                            <apiPackage>${rest.package}.spring</apiPackage>
-                            <generateApis>true</generateApis>
-                            <generateApiTests>false</generateApiTests>
-                            <generateModels>false</generateModels>
-                            <generateSupportingFiles>true</generateSupportingFiles>
-                            <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
+<!--            Uncomment when https://github.com/OpenAPITools/openapi-generator/issues/1646 is fixed-->
+<!--            <plugin>-->
+<!--                <groupId>org.openapitools</groupId>-->
+<!--                <artifactId>openapi-generator-maven-plugin</artifactId>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>process-resources</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>generate</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <inputSpec>${project.build.directory}/openapi/openapi.yaml-->
+<!--                            </inputSpec>-->
+<!--                            <generatorName>spring</generatorName>-->
+<!--                            <apiPackage>${root.package}.stub</apiPackage>-->
+<!--                            <configOptions>-->
+<!--                                <java8>true</java8>-->
+<!--                                <dateLibrary>java8</dateLibrary>-->
+<!--                                <useTags>true</useTags>-->
+<!--                                <interfaceOnly>true</interfaceOnly>-->
+<!--                                <useOptional>true</useOptional>-->
+<!--                                <booleanGetterPrefix>is</booleanGetterPrefix>-->
+<!--                                <sortParamsByRequiredFlag>true</sortParamsByRequiredFlag>-->
+<!--                                <useBeanValidation>true</useBeanValidation>-->
+<!--                                <performBeanValidation>false</performBeanValidation>-->
+<!--                                <sourceFolder>src/main/java</sourceFolder>-->
+<!--                            </configOptions>-->
+<!--                            <modelPackage>${rest.models.package}</modelPackage>-->
+<!--                            <apiPackage>${rest.package}.spring</apiPackage>-->
+<!--                            <generateApis>true</generateApis>-->
+<!--                            <generateApiTests>false</generateApiTests>-->
+<!--                            <generateModels>false</generateModels>-->
+<!--                            <generateSupportingFiles>true</generateSupportingFiles>-->
+<!--                            <supportingFilesToGenerate>ApiUtil.java</supportingFilesToGenerate>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
             <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
