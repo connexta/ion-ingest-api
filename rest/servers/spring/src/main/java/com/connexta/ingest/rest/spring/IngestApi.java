@@ -78,7 +78,7 @@ public interface IngestApi {
       @ApiParam(
               "A file attachment that is sent in the request. The current maximum is the character equivalent of 10GB.")
           @Valid
-          @RequestPart("file")
+          @RequestPart(value = "file", required = true)
           MultipartFile file,
       @ApiParam(
               value =
