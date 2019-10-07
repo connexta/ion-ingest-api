@@ -41,7 +41,7 @@
         </dependency>
         <!--
             Replace io.springfox:springfox-swagger2 with io.swagger.core.v3:swagger-core when
-            the generator supports io.swagger.v3.annotations
+            the generator supports io.swagger.v3.annotations.
         -->
         <dependency>
             <groupId>io.springfox</groupId>
