@@ -24,6 +24,7 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.time.OffsetDateTime;
 import java.util.Optional;
 
 /*
@@ -75,6 +76,12 @@ public interface IngestApi {
               required = true)
           @RequestHeader(value = "Accept-Version", required = true)
           String acceptVersion,
+      @ApiParam(
+              value =
+                  "The last modified time of the product to be ingested. ",
+              required = true)
+          @RequestHeader(value = "Last-Modified", required = true)
+              OffsetDateTime lastModified,
       @ApiParam(
               "A file attachment that is sent in the request. The current maximum is the character equivalent of 10GB.")
           @Valid

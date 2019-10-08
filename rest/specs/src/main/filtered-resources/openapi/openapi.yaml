@@ -31,6 +31,7 @@ paths:
         - ingest
       parameters:
         - $ref: '#/components/parameters/Accept-Version'
+        - $ref: '#/components/parameters/Last-Modified'
       requestBody:
         required: true
         description: >
@@ -108,6 +109,16 @@ components:
       required: true
       schema:
         $ref: '#/components/schemas/Version'
+    Last-Modified:
+      name: Last-Modified
+      in: header
+      description: >
+        The last modified time of the product to be ingested.
+      required: true
+      schema:
+        type: string
+        format: date-time
+        example: '2017-06-11T14:32:28Z'
   headers:
     ContentVersion:
       description: >
