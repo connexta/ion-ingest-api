@@ -197,7 +197,7 @@ components:
           type: string
           format: date-time
           description: The server time when the error was generated.
-          example: 2019-05-09T14:47:13.101+0000
+          example: '2019-05-09T14:47:13.101+00:00'
         path:
           type: string
           description: The path for the REST request that generated this error.
