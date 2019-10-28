@@ -39,10 +39,10 @@ public interface IngestApi {
   }
 
   @ApiOperation(
-      value = "Ingest endpoint for products.",
+      value = "Ingest endpoint for a dataset.",
       nickname = "ingest",
       notes =
-          "A system can use the Ingest endpoint to send one or more attachments and a JSON description of a product. ",
+          "A system can use the Ingest endpoint to ingest a dataset for validation, transformation, and storage. ",
       tags = {"ingest"})
   @ApiResponses({
     @ApiResponse(code = 202, message = "The ingest request was accepted. "),
@@ -72,30 +72,32 @@ public interface IngestApi {
   default ResponseEntity<Void> ingest(
       @ApiParam(
               value =
-                  "The minimal API version that a client using this API will accept responses from. ",
+                  "The minimal API version from which the client using this API will accept responses. ",
               required = true)
           @RequestHeader(value = "Accept-Version", required = true)
           String acceptVersion,
       @ApiParam(
               value =
-                  "The last modified time of the product to be ingested. ",
+                  "The last modified time of the dataset to be ingested. ",
               required = true)
           @RequestHeader(value = "Last-Modified", required = true)
               OffsetDateTime lastModified,
       @ApiParam(
-              "A file attachment that is sent in the request. The current maximum is the character equivalent of 10GB.")
+              value =
+                  "A file attachment that is sent in the ingest request. The current maximum is the character equivalent of 10GB.",
+              required = true)
           @Valid
           @RequestPart(value = "file", required = true)
           MultipartFile file,
       @ApiParam(
               value =
-                  "A unique client provided identifier for the product to be ingested which will allow the client to retrieve the product and/or any other information associated with it in the future. Only one product can exist with a given correlation identifier. This means that a request to ingest a product with an existing correlation id will result in a failure with no changes to the existing product or associated information. ",
+                  "A unique correlation id for the dataset to be ingested which will allow the client to perform actions with the dataset and/or any other information associated with it in the future. Only one dataset can exist with a given correlation id. This means that a request to ingest a dataset with an existing correlation id will result in a failure with no changes to the existing dataset or associated information. ",
               required = true)
           @RequestParam(value = "correlationId", required = true)
           String correlationId,
       @ApiParam(
               value =
-                  "A metacard.xml attachment that is sent along with a product to enhance the product's discoverability. The current maximum is the character equivalent of 10GB.",
+                  "A metacard.xml attachment that is sent in the ingest request to enhance validation and transformation. The current maximum is the character equivalent of 10GB.",
               required = true)
           @Valid
           @RequestPart(value = "metacard", required = true)

@@ -10,8 +10,8 @@ info:
   version: ${project.version}
   title: Ingest API
   description: >
-    The Ingest API is defined to provide clients with the ability to
-    ingest products for validation, transformation and storage.
+    The Ingest API is defined to provide clients with the ability to ingest a dataset for
+    validation, transformation, and storage.
   contact:
     name: Connexta
   license:
@@ -22,10 +22,10 @@ servers:
 paths:
   /ingest:
     post:
-      summary: Ingest endpoint for products.
+      summary: Ingest endpoint for a dataset.
       description: >
-        A system can use the Ingest endpoint to send one or more attachments
-        and a JSON description of a product.
+        A system can use the Ingest endpoint to ingest a dataset for validation, transformation, and
+        storage.
       operationId: ingest
       tags:
         - ingest
@@ -35,7 +35,7 @@ paths:
       requestBody:
         required: true
         description: >
-          The body of the ingest request that includes and describes an attached file(s).
+          The body of the ingest request that includes the dataset.
         content:
           multipart/form-data:
             schema:
@@ -104,8 +104,7 @@ components:
       name: Accept-Version
       in: header
       description: >
-        The minimal API version that a client using this API will accept
-        responses from.
+        The minimal API version from which the client using this API will accept responses.
       required: true
       schema:
         $ref: '#/components/schemas/Version'
@@ -113,7 +112,7 @@ components:
       name: Last-Modified
       in: header
       description: >
-        The last modified time of the product to be ingested.
+        The last modified time of the dataset to be ingested.
       required: true
       schema:
         type: string
@@ -153,25 +152,26 @@ components:
         - metacard
     File:
       description: >
-        A file attachment that is sent in the request. The current maximum is the character equivalent of 10GB.
+        A file attachment that is sent in the ingest request. The current maximum is the character
+        equivalent of 10GB.
       type: string
       format: binary
       minLength: 1
       maxLength: 14316557655
     CorrelationId:
       description: >
-        A unique client provided identifier for the product to be ingested which will allow the client to
-        retrieve the product and/or any other information associated with it in the future. Only one product
-        can exist with a given correlation identifier. This means that a request to ingest a product with an
-        existing correlation id will result in a failure with no changes to the existing product or
-        associated information.
+        A unique correlation id for the dataset to be ingested which will allow the client to
+        perform actions with the dataset and/or any other information associated with it in the
+        future. Only one dataset can exist with a given correlation id. This means that a request to
+        ingest a dataset with an existing correlation id will result in a failure with no changes to
+        the existing dataset or associated information.
       type: string
       minLength: 1
       maxLength: 256
     Metacard:
       description: >
-        A metacard.xml attachment that is sent along with a product to enhance the product's discoverability. The
-        current maximum is the character equivalent of 10GB.
+        A metacard.xml attachment that is sent in the ingest request to enhance validation and
+        transformation. The current maximum is the character equivalent of 10GB.
       type: string
       format: binary
       minLength: 1
