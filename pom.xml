@@ -106,14 +106,7 @@
             <dependency>
                 <groupId>org.openapitools</groupId>
                 <artifactId>jackson-databind-nullable</artifactId>
-                <version>0.2.0</version>
-                <exclusions>
-                    <!-- jackson-databind-2.9.9.3.jar: CVE-2019-16335, CVE-2019-14540 -->
-                    <exclusion>
-                        <groupId>com.fasterxml.jackson.core</groupId>
-                        <artifactId>jackson-databind</artifactId>
-                    </exclusion>
-                </exclusions>
+                <version>0.2.1</version>
             </dependency>
             <dependency>
                 <groupId>io.springfox</groupId>
