@@ -1,3 +1,5 @@
+## ion-ingest-api is now ARCHIVED
+
 # Ingest API
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=connexta/ion-ingest-api)](https://dependabot.com)
 [![Known Vulnerabilities](https://snyk.io/test/github/connexta/ion-ingest-api/badge.svg)](https://snyk.io/test/github/connexta/ion-ingest-api)
